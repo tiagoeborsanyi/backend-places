@@ -40,7 +40,7 @@ const signup = async (req, res, next) => {
   const createdUser = new User({
     name,
     email,
-    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Ficonscout.com%2Ficon%2Favatar-367&psig=AOvVaw1vanAgmPCVEbcKNV2BaSCv&ust=1585334056437000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLDl6OLjuOgCFQAAAAAdAAAAABAD',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6KEzKL7hovYwKuB1RRKMk1Nm86NFH3XtFOstdqxvsy4nKhZfsrQ&s',
     password,
     places: []
   });
