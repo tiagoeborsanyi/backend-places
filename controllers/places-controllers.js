@@ -9,10 +9,10 @@ const User = require('../models/user');
 
 const getPlaceById = async (req, res, next) => {
 	const placeId = req.params.pid;
-  
+
   let place;
   try {
-    place = await Place.findById(placeId); 
+    place = await Place.findById(placeId);
   } catch (error) {
     const err = new HttpError('Something whent weong, could not find a place.', 500);
     return next(err);
@@ -27,19 +27,19 @@ const getPlaceById = async (req, res, next) => {
 
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
- 
+
   let userWithPlaces;
   try {
-    userWithPlaces = await User.findById(userId).populate('places'); 
+    userWithPlaces = await User.findById(userId).populate('places');
   } catch (error) {
     const err = new HttpError('Fetching places failed, please try again later', 500);
     return next(err);
   }
-  
+
 	if (!userWithPlaces || userWithPlaces.length === 0) {
 		return next(new HttpError('Could not find places for the provided user id.', 404));
   }
-  
+
 	res.json({ places: userWithPlaces.places.map(place => place.toObject({ getters: true })) });
 };
 
@@ -50,7 +50,7 @@ const createPlace = async (req, res, next) => {
   }
 
   const { title, description, address, creator } = req.body;
-  
+
   let coordinates;
   try {
     coordinates = await getCoordForAddress();
@@ -59,11 +59,11 @@ const createPlace = async (req, res, next) => {
   }
 
   const createdPlace = new Place({
-    title, 
-    description, 
+    title,
+    description,
     address,
     location: coordinates,
-    image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpt.wikipedia.org%2Fwiki%2FTimes_Square&psig=AOvVaw2RGugdZQUqTJNfOJVIBwtB&ust=1585324847694000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJD_lLfBuOgCFQAAAAAdAAAAABAD',
+    image: 'https://static01.nyt.com/images/2020/03/16/nyregion/16nyvirus-briefingNEW15/16nyvirus-briefingNEW15-superJumbo.jpg',
     creator
   });
 
@@ -115,7 +115,7 @@ const updatePlace = async (req, res, next) => {
     const err = new HttpError('Something went, could not update place', 500);
     return next(err);
   }
-  
+
   place.title = title;
   place.description = description;
 
@@ -131,7 +131,7 @@ const updatePlace = async (req, res, next) => {
 
 const deletePlace = async (req, res, next) => {
   const placeId = req.params.pid;
-  
+
   let place;
   try {
     place = await Place.findById(placeId).populate('creator');
