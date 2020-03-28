@@ -63,7 +63,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image: 'https://static01.nyt.com/images/2020/03/16/nyregion/16nyvirus-briefingNEW15/16nyvirus-briefingNEW15-superJumbo.jpg',
+    image: req.file.path,
     creator
   });
 
