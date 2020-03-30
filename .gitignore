@@ -1,3 +1,4 @@
 node_modules
 package-lock.json
 URL_MONGO.js
+nodemon.json

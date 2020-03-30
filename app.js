@@ -44,6 +44,6 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(URL_MONGO.url)
+  .connect(`mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASSWORD}@clusterplaces-g4hmr.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
   .then(() => app.listen(5000, () => console.log('connect on port 5000')))
   .catch(err => console.log(err));
